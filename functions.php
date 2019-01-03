@@ -35,10 +35,14 @@ if (!function_exists('SIDEA_replaceOtherChoice')) {
     function SIDEA_replaceOtherChoice ($values, $service, $cf7) {
         if ($values['importo'] == 'gf_other_choice') {
             $values['importo'] = $values['importo_altro']; // valorizzo il campo importo con il valore inserito dall'utente nel campo 'altro'
+            if (is_numeric($values['importo'])) {
+                $values['importo'] = number_format($values['importo'], 0, ",", '.'); // se il valore inserito è numerico, lo formatto (es 150.200)
+            }
         } else {
             $values['importo'] = str_replace(".", "", $values['importo']); // rimuovo l'eventuale punto all'interno dell'importo
         }
-        unset($values['importo_altro']);
+
+        unset($values['importo_altro']); // in ogni caso, al termine cancello la chiave importo_altro
 
         return $values;
     }
