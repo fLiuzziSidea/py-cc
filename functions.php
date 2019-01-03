@@ -38,8 +38,6 @@ if (!function_exists('SIDEA_replaceOtherChoice')) {
             if (is_numeric($values['importo'])) {
                 $values['importo'] = number_format($values['importo'], 0, ",", '.'); // se il valore inserito è numerico, lo formatto (es 150.200)
             }
-        } else {
-            $values['importo'] = str_replace(".", "", $values['importo']); // rimuovo l'eventuale punto all'interno dell'importo
         }
 
         unset($values['importo_altro']); // in ogni caso, al termine cancello la chiave importo_altro
