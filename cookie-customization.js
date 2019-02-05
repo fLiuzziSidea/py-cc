@@ -1,14 +1,27 @@
 if (jQuery) {
     $ = jQuery;
 
-    const YES_LABEL = 'Acconsento';
-    const NO_LABEL = 'No';
-    const PRIVACY_POLICY_LABEL = 'Privacy policy';
-    const PTIVACY_POLICY_URL = '/privacy-policy/';
-    
-    const MAX_SECONDS_TRYING = 5;
-    const HIDE_NO_BUTTON = true; // true false
-    const ACCEPT_AFTER_SCROLLING = 0.25; // % of page OR true/false
+    // CookieCustomizationOptions = {
+    //     YES_LABEL = 'Acconsento',
+    //     NO_LABEL = 'No',
+    //     PRIVACY_POLICY_LABEL = 'Privacy policy',
+    //     PTIVACY_POLICY_URL = '/privacy-policy/',
+        
+    //     MAX_SECONDS_TRYING = 5,
+    //     HIDE_NO_BUTTON = true, // true false
+    //     ACCEPT_AFTER_SCROLLING = 0.25 // % of page OR true/false
+    // };
+
+    const {
+        YES_LABEL = 'Acconsento',
+        NO_LABEL = 'No',
+        PRIVACY_POLICY_LABEL = 'Privacy policy',
+        PTIVACY_POLICY_URL = '/privacy-policy/',
+        
+        MAX_SECONDS_TRYING = 5,
+        HIDE_NO_BUTTON = true, // true false
+        ACCEPT_AFTER_SCROLLING = 0.25 // % of page OR true/false
+    } = typeof CookieCustomizationOptions !== undefined ? CookieCustomizationOptions : {};
     
     $(function(){
         let i = 0;
@@ -40,7 +53,7 @@ if (jQuery) {
                 if (ACCEPT_AFTER_SCROLLING !== undefined && ACCEPT_AFTER_SCROLLING !== false) {
                     $(window).on('scroll', (evt) => {
                         if ($(window).scrollTop() >= (($(document).height() - $(window).height()) * ACCEPT_AFTER_SCROLLING)) {
-                            console.log('yesBtn.click();');
+                            yesBtn.click();
                             $(window).off(evt); // stacco l'evento dopo aver cliccato su si
                         }
                     });
@@ -50,7 +63,6 @@ if (jQuery) {
             if( ( cookieBarInitialized ) ||
                 i > (MAX_SECONDS_TRYING * 1000 / INTERVAL_MILLISECONDS_STEP) ) {
                 clearInterval(interval);
-                console.log('cleared' , i);
             }
         }, INTERVAL_MILLISECONDS_STEP);
     });
