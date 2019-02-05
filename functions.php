@@ -1,21 +1,6 @@
 <?php
 
-// Defines
-define( 'FL_CHILD_THEME_DIR', get_stylesheet_directory() );
-define( 'FL_CHILD_THEME_URL', get_stylesheet_directory_uri() );
-
-// Classes
-require_once 'classes/class-fl-child-theme.php';
-
-// Actions
-add_action( 'wp_enqueue_scripts', 'FLChildTheme::enqueue_scripts', 1000 );
-//Disable gravity form anchor for a specific form with id5 & id14
-/*add_filter( 'gform_confirmation_anchor_5', '__return_false' );
-add_filter( 'gform_confirmation_anchor_14', '__return_false' );*/
-//Disable gravity form field labels selector
-add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
-
-
+// ...
 
 add_filter('Forms3rdPartyIntegration_service_filter_args', 'SIDEA_forwardCookies4PardotIntegration', 10, 4);
 
@@ -30,10 +15,11 @@ if (!function_exists('SIDEA_forwardCookies4PardotIntegration')) { // faccio il f
 }
 
 add_filter('Forms3rdPartyIntegration_service_filter_post_0', 'SIDEA_replaceOtherChoice', 10, 4);
+add_filter('Forms3rdPartyIntegration_service_filter_post_1', 'SIDEA_replaceOtherChoice', 10, 4);
 
 if (!function_exists('SIDEA_replaceOtherChoice')) {
     function SIDEA_replaceOtherChoice ($values, $service, $cf7) {
-        if ($values['importo'] == 'gf_other_choice') {
+        if ($values['importo'] == 'gf_other_choice' || $values['importo'] == 'ALTRO IMPORTO') {
             $values['importo'] = $values['importo_altro']; // valorizzo il campo importo con il valore inserito dall'utente nel campo 'altro'
             if (is_numeric($values['importo']) && !is_float($values['importo'] + 0)) {
                 $values['importo'] = number_format($values['importo'], 0, ",", '.'); // se il valore inserito è numerico, lo formatto (es 150.200)
