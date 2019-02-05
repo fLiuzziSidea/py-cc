@@ -5,7 +5,7 @@ if (jQuery) {
         YES_LABEL = 'Acconsento',
         NO_LABEL = 'No',
         PRIVACY_POLICY_LABEL = 'Privacy policy',
-        PTIVACY_POLICY_URL = '/privacy-policy/',
+        PRIVACY_POLICY_URL = '/privacy-policy/',
         
         MAX_SECONDS_TRYING = 5,
         HIDE_NO_BUTTON = true, // true false
@@ -28,7 +28,7 @@ if (jQuery) {
                 const privacyPolicyBtn = $(`&nbsp;<a>${PRIVACY_POLICY_LABEL}</a>`)
                     .addClass('btn btn-xs btn-default')
                     .attr('target', '_blank')
-                    .attr('href', PTIVACY_POLICY_URL);
+                    .attr('href', PRIVACY_POLICY_URL);
                 container.find('div').detach(); // tolgo il div vuoto alla fine
                 container.append(privacyPolicyBtn); // aggiunto il link alla privacy policy
 
