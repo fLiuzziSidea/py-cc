@@ -10,7 +10,7 @@ if (jQuery) {
         MAX_SECONDS_TRYING = 5,
         HIDE_NO_BUTTON = true, // true false
         ACCEPT_AFTER_SCROLLING = 0.25 // % of page OR true/false
-    } = typeof CookieCustomizationOptions !== undefined ? CookieCustomizationOptions : {};
+    } = typeof CookieCustomizationOptions !== 'undefined' ? CookieCustomizationOptions : {};
     
     $(function(){
         let i = 0;
