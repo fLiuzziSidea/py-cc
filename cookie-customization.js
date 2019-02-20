@@ -32,7 +32,6 @@ if (jQuery) {
             const cookieBarInitialized = yesBtn.length > 0 && noBtn.length > 0;
             
             if (cookieBarInitialized) {
-
                 const container = yesBtn.parent('div');
 
                 const privacyPolicyBtn = $(`&nbsp;<a>${PRIVACY_POLICY_LABEL}</a>`)
@@ -52,6 +51,11 @@ if (jQuery) {
 
                 noBtn.text(NO_LABEL).click(pardotDenyConsent);
                 if (HIDE_NO_BUTTON) noBtn.detach();
+
+                const responsiveClearfix = $('<div></div>')
+                    .addClass('clearfix visible-xs');
+
+                responsiveClearfix.insertBefore(yesBtn);
 
                 if (ACCEPT_AFTER_SCROLLING !== undefined && ACCEPT_AFTER_SCROLLING !== false) {
                     $(window).on('scroll', (evt) => {
