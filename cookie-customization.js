@@ -11,8 +11,9 @@ if (jQuery) {
         YES_CLASS = 'btn btn-xs btn-primary',
         YES_BACKGROUND = '#337ab7', // #09c8ee
         MAX_SECONDS_TRYING = 5,
-        HIDE_NO_BUTTON = true, // true false
-        ACCEPT_AFTER_SCROLLING = 0.25 // % of page OR true/false
+        HIDE_NO_BUTTON = true, // true/false
+        ACCEPT_AFTER_SCROLLING = 0.25, // % of page OR true/false
+        ACCEPT_BEFORE_FORM_SUBMIT = true // true/false
     } = typeof CookieCustomizationOptions !== 'undefined' ? CookieCustomizationOptions : {};
     
     $(function(){
@@ -57,12 +58,22 @@ if (jQuery) {
 
                 responsiveClearfix.insertBefore(yesBtn);
 
+                const acceptCookies = (evt, element) => {
+                    if (!pardotDeniedConsent) yesBtn.click();
+                    $(element).off(evt); // stacco l'evento dopo aver cliccato su si
+                };
+
                 if (ACCEPT_AFTER_SCROLLING !== undefined && ACCEPT_AFTER_SCROLLING !== false) {
-                    $(window).on('scroll', (evt) => {
+                    $(window).on('scroll', function (evt) {
                         if ($(window).scrollTop() >= (($(document).height() - $(window).height()) * ACCEPT_AFTER_SCROLLING)) {
-                            if (!pardotDeniedConsent) yesBtn.click();
-                            $(window).off(evt); // stacco l'evento dopo aver cliccato su si
+                            acceptCookies(evt, window);
                         }
+                    });
+                }
+
+                if (ACCEPT_BEFORE_FORM_SUBMIT) {
+                    $(document).on('submit', 'form', (evt) => {
+                        acceptCookies(evt, 'form');
                     });
                 }
             }
