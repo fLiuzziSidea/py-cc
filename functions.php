@@ -31,3 +31,20 @@ if (!function_exists('SIDEA_replaceOtherChoice')) {
         return $values;
     }
 }
+
+add_filter('Forms3rdPartyIntegration_service_filter_post', 'SIDEA_email_filler', 10, 5);
+if (!function_exists('SIDEA_email_filler')) {
+    function SIDEA_email_generator() {
+        $timestamp = time();
+
+        return "no_mail-{$timestamp}@prestiyou.nomail";
+    }
+
+    function SIDEA_email_filler($post, $service, $form, $sid, $submission) {
+        if (empty($post['email'])) {
+            $post['email'] = SIDEA_email_generator();
+        }
+
+        return $post;
+    }
+}
