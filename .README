@@ -18,3 +18,4 @@ const CookieCustomizationOptions = {
     MAX_SECONDS_TRYING: 5
 };
 ```
+
